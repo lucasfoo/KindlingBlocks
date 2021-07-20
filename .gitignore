@@ -1,1 +1,34 @@
 node_modules
+
+# dependencies
+crowdfund-client/node_modules
+crowdfund-client/.pnp
+crowdfund-client/.pnp.js
+
+# testing
+crowdfund-client/coverage
+
+# next.js
+crowdfund-client/.next/
+crowdfund-client/out/
+
+# production
+crowdfund-client/build
+
+# misc
+crowdfund-client/.DS_Store
+crowdfund-client/*.pem
+
+# debug
+crowdfund-client/npm-debug.log*
+crowdfund-client/yarn-debug.log*
+crowdfund-client/yarn-error.log*
+
+# local env files
+.crowdfund-client/env.local
+crowdfund-client/.env.development.local
+crowdfund-client/.env.test.local
+crowdfund-client/.env.production.local
+
+# vercel
+crowdfund-client/.vercel
