@@ -1,0 +1,35 @@
+{
+  "manifestVersion": "3.2",
+  "admin": {
+    "address": "0xf25186B5081Ff5cE73482AD761DB0eB0d25abfBF",
+    "txHash": "0x3b967e881b213368b6f53ff11d4af9608e4cf1249e048ca19ad750d5ef663c74"
+  },
+  "proxies": [
+    {
+      "address": "0x8f0483125FCb9aaAEFA9209D8E9d7b9C8B9Fb90F",
+      "txHash": "0x564a694f0af7232d34edd74e9ad0c34c5d1021e27a17abec4c8388631597a932",
+      "kind": "transparent"
+    }
+  ],
+  "impls": {
+    "935b140d997f247b81134770797ee817fe2eb03b7974e132f018770b6aaa0280": {
+      "address": "0x345cA3e014Aaf5dcA488057592ee47305D9B3e10",
+      "txHash": "0x608fc4b40d455c1975d9b8c1189800d40c239f42bf9440e5dc8f702076ece68f",
+      "layout": {
+        "storage": [
+          {
+            "contract": "MyToken",
+            "label": "value",
+            "type": "t_uint256",
+            "src": "..\\..\\..\\..\\G\\Blockchain\\UniqueTelegramToken\\erc20\\contracts\\MyToken.sol:6"
+          }
+        ],
+        "types": {
+          "t_uint256": {
+            "label": "uint256"
+          }
+        }
+      }
+    }
+  }
+}
