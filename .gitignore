@@ -32,3 +32,4 @@ crowdfund-client/.env.production.local
 
 # vercel
 crowdfund-client/.vercel
+erc20/.secret

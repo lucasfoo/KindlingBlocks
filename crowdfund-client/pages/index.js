@@ -30,7 +30,7 @@ export default class Home extends React.Component {
     this.accounts = await this.web3.eth.getAccounts();
     this.crowdfundContract = new this.web3.eth.Contract(
       Crowdfund.abi,
-      "0x402f96AA58dF4ab34009a3D0eF34Ec6F0C3bAfE6",
+      "0x0Fe574b94382b8EdAB634CC4b6Fc0B3B8e7149d1",
       {
         from: this.accounts[0], // default from address
         gasPrice: "20000000000", // default gas price in wei, 20 gwei in this case

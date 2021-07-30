@@ -28,6 +28,7 @@ export default class CampaignComponent extends React.Component {
       isOpen: true,
       date: new Date(),
       canClose: false,
+      pledgeAmount: 0,
     };
   }
   async componentDidMount() {
@@ -107,7 +108,10 @@ export default class CampaignComponent extends React.Component {
   };
 
   render() {
-    if (this.state.goal > 0) {
+    if (
+      new Date(this.state.endDate * 1000) > new Date() ||
+      this.state.funded > 0
+    ) {
       return (
         <div className="p-4 lg:w-1/3">
           <div className="h-full bg-gray-100 bg-opacity-75 px-8 pt-16 pb-24 rounded-lg overflow-hidden text-center relative">
@@ -165,9 +169,27 @@ export default class CampaignComponent extends React.Component {
             {new Date() > new Date(this.state.endDate * 1000) ? (
               <div></div>
             ) : (
-              <button className="btn" onClick={() => this.pledge()}>
-                Pledge
-              </button>
+              <div>
+                <form
+                  className="lg:w-1/2 md:w-2/3 mx-auto p-2 w-1/2"
+                  autoComplete="off"
+                >
+                  <label className="leading-7 text-sm text-gray-600">
+                    Pledge Amount:
+                    <input
+                      type="number"
+                      step="0.001"
+                      name="amount"
+                      onChange={(event) => this.handlePledgeAmountChange(event)}
+                      className="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
+                    />
+                    Ether
+                  </label>
+                </form>
+                <button className="btn" onClick={() => this.pledge()}>
+                  Pledge
+                </button>
+              </div>
             )}
             {this.state.isOpen &&
             this.state.tokenBalance > 0 &&
@@ -221,15 +243,19 @@ export default class CampaignComponent extends React.Component {
   }
 
   async pledge() {
+    console.log(this.state.pledgeAmount);
     const accounts = await this.web3.eth.getAccounts();
     console.log(accounts[0]);
     const estimatedGas = await this.state.campaignContract.methods
       .pledge()
-      .estimateGas({ from: accounts[0], value: this.web3.utils.toWei("1") });
+      .estimateGas({
+        from: accounts[0],
+        value: this.web3.utils.toWei(this.state.pledgeAmount.toString()),
+      });
     const res = await this.state.campaignContract.methods.pledge().send({
       from: accounts[0],
       gas: estimatedGas,
-      value: this.web3.utils.toWei("1"),
+      value: this.web3.utils.toWei(this.state.pledgeAmount.toString()),
     });
     console.log(res);
     await this.getContractInfo();
@@ -309,5 +335,9 @@ export default class CampaignComponent extends React.Component {
       await this.state.tokenContract.methods.balanceOf(accounts[0]).call()
     );
     await this.getContractInfo();
+  }
+
+  handlePledgeAmountChange(event) {
+    this.setState({ pledgeAmount: event.target.value });
   }
 }
